@@ -1,0 +1,69 @@
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hello World!"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</android.support.constraint.ConstraintLayout>
+
+
+class MainActivity : AppCompatActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+//setting toolbar
+        setSupportActionBar(findViewById(R.id.toolbar))
+        //home navigation
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+      //  menuInflater.inflate(R.menu.my_menu,menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+    override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
+
+        android.R.id.home ->{
+            val ad = AlertDialog.Builder(this)
+            ad.setTitle("Title")
+            ad.setMessage("Back clicked")
+            ad.setPositiveButton("yess"){dialog , id ->
+                Toast.makeText(this@MainActivity, "Let's Play", Toast.LENGTH_SHORT).show()
+
+            }
+
+            ad.setNegativeButton("No") { dialog, id ->
+                //perform som tasks here
+                Toast.makeText(this@MainActivity, "Maybe next time", Toast.LENGTH_SHORT).show()
+            }
+            ad.show()
+            true
+        }
+        else -> {
+            super.onOptionsItemSelected(item)
+        }
+    }
+}
